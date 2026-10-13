@@ -50,3 +50,32 @@
     - Necesidad de filtrado ágil sin salir del listado: Los compradores quieren saber las opciones según la edad y el presupuesto de manera inmediata. Para ello usamos el filter chips de Material Design 3 y selector de ordenación en la cabecera del catálogo.
     - Miedo al borrado accidental en la cesta: En pantallas táctiles es común pulsar sin querer sobre la papelera por error. Para ello usaremos un aviso emergente con snackbar con el que podamos deshacer la desición que se ha tomado.
     - Frustración ante errores en el formulario de pago: Los usuarios abandonan la compra si no encuentran el causante del fallo. Para ello hemos implementado text fields para que los errores sean visibles con iconos semánticos y textos de ayuda claros.
+
+## 3. Diseño de la interfaz
+### 3.1 Mapa de navegación                   
+
+```mermaid
+graph TD
+    %% Barra de navegación inferior (Destinos principales)
+    NB[Navigation Bar] --> INICIO[1. Inicio]
+    NB --> CATALOGO[2. Catálogo]
+    NB --> PERFIL[7. Perfil / Favoritos]
+
+    %% Flujo desde Inicio
+    INICIO -->|Buscador o Categoría: Bebé, Niña, Niño| CATALOGO
+
+    %% Flujo de Catálogo a Detalle
+    CATALOGO -->|Seleccionar prenda| DETALLE[3. Detalle de Producto]
+    
+    %% Detalle y componentes
+    DETALLE -.->|Botón 'Guía de tallas'| BS[Bottom Sheet: Medidas]
+    DETALLE -->|Añadir al carrito| CARRITO[4. Carrito]
+
+    %% Flujo de Compra
+    CARRITO -->|Iniciar compra| CHECKOUT[5. Checkout]
+    CARRITO -.->|Eliminar producto| SNACK[Snackbar: Deshacer]
+    
+    CHECKOUT -->|Corregir campos y Pagar| CONFIRMACION[6. Confirmación]
+    CONFIRMACION -->|Volver al inicio| INICIO
+```
+### 3.2 Wireframes
